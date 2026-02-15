@@ -1,6 +1,5 @@
 typedef unsigned char  u8;
 typedef unsigned short u16;
-typedef unsigned int   u32;
 
 #define VGA_WIDTH 80
 #define VGA_HEIGHT 25
@@ -103,6 +102,14 @@ void kmain(void) {
     }
 
     for (;;) {
-        __asm__ __volatile__("hlt");
+        __asm__ __volatile__("cli; hlt");
+    }
+}
+
+__attribute__((section(".text.start")))
+void _start(void) {
+    kmain();
+    for (;;) {
+        __asm__ __volatile__("cli; hlt");
     }
 }

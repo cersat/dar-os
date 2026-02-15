@@ -14,7 +14,7 @@ else
   exit 1
 fi
 
-ld -m "$ld_mode" -T linker.ld -nostdlib -e kmain kernel.o -o kernel.elf
+ld -m "$ld_mode" -T linker.ld -nostdlib -e _start kernel.o -o kernel.elf
 objcopy -O binary kernel.elf kernel.bin
 
 kernel_size=$(stat -c%s kernel.bin)
